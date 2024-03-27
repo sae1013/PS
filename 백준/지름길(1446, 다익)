@@ -1,0 +1,32 @@
+```python
+import heapq
+def dijkstra():
+    q = []
+    heapq.heappush(q,(0,0)) # cost , node
+
+    while q :
+        cost,node = heapq.heappop(q)
+        if dp[node] >= cost :
+            dp[node] = cost # 현재 노드에 대한
+
+            for nextcost,nextnode in graph[node] : #
+                if cost + nextcost < dp[nextnode] :
+                    dp[nextnode] = cost + nextcost
+                    heapq.heappush(q,[dp[nextnode], nextnode])
+
+INF = 10**9
+N,D = map(int,input().split())
+graph = [[] for _ in range(D+1)]
+dp = [INF]* (D+1)
+
+for i in range(D):
+    graph[i].append((1,i+1)) # 이부분이 중요함. 0 번 인덱스에 다 담으면 중간 길이 갱신되도 알고리즘을 안탐
+
+for i in range(N):
+    a,b,c = map(int,input().split())
+    if b > D :
+        continue
+    graph[a].append((c,b))
+dijkstra()
+print(dp[D])
+```
