@@ -1,0 +1,49 @@
+O(T*N)
+
+```python
+t = int(input())
+for _ in range(t):
+    n = int(input())
+    arr = list(map(int, input().split()))
+    ll_cnt = 0
+    rr_cnt = 0
+    ll = 0
+    rr = len(arr) - 1
+    last = 0  # last candy
+    cur_cnt = 0
+    turn = 0
+    while True :
+        while ll <= rr:
+            cur_cnt += arr[ll]  # 왼쪽을 먹는다.
+            ll+=1
+            if cur_cnt <= last: # 아직 부족하면 더 먹는다.
+                continue
+            else:
+                break
+        ll_cnt += cur_cnt
+        last = cur_cnt
+        cur_cnt = 0  # 초기화
+        turn += 1
+
+        if ll > rr :
+            break
+
+        while ll <= rr:
+            cur_cnt += arr[rr]
+            rr-=1
+            if cur_cnt <= last:  # 계속먹어야한다.
+                continue
+            else:
+                break
+        rr_cnt += cur_cnt
+        last = cur_cnt
+        cur_cnt = 0
+        turn += 1
+        if ll > rr :
+            break
+            
+    print(turn,ll_cnt,rr_cnt)
+
+
+
+```
