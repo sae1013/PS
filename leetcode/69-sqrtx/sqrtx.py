@@ -1,7 +1,7 @@
 # binary search
 class Solution:
     def mySqrt(self, x: int) -> int:
-        ll = 0
+        ll = 1
         rr = x
         ans = 0
         while ll <= rr :
