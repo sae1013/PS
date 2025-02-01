@@ -1,0 +1,30 @@
+접근법:
+제한조건이 크고, 완전탐색 해야하는 문제였다. 
+이분탐색으로 접근법을 바로 떠올렸다
+
+
+# O(logN*10^5)
+def solution(diffs, times, limit):
+    def calculate(level):
+        sum = times[0]
+        for i in range(1,len(diffs)):
+            if level >= diffs[i]:
+                sum += times[i]
+            else:
+                sum += (diffs[i] - level) * (times[i - 1] + times[i]) + times[i]
+        return sum
+
+    ll = 1
+    rr = 3 * 10 ** 5
+    ans = 0
+    while ll <= rr:
+
+        mid = (ll + rr) // 2
+
+        time = calculate(mid)
+        if time <= limit:
+            rr = mid - 1
+            ans = mid
+        else:
+            ll = mid + 1
+    return ans
